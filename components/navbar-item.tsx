@@ -24,13 +24,17 @@ export const NavbarItem = () => {
 
   return (
     <>
-      <div className="flex gap-7 items-center">
+      <div className="lg:flex hidden gap-7 items-center">
         <div>
-          {/* <Image
-                     src={}
-                     alt="One Percent"
-                    /> */}
-          image here
+          <Link href="/">
+            <Image
+              className="cursor-pointer"
+              width={100}
+              height={100}
+              alt="OnePercent"
+              src="/logo.jpg"
+            />
+          </Link>
         </div>
         <div className="flex gap-4">
           {routes.map((route) => (
@@ -47,7 +51,7 @@ export const NavbarItem = () => {
           ))}
         </div>
       </div>
-      <div className="flex gap-5">
+      <div className="lg:flex hidden gap-5">
         <Search
           strokeWidth={1}
           className="size-6 hover:scale-105 cursor-pointer"
