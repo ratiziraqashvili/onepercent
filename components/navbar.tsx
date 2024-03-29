@@ -9,7 +9,7 @@ export const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    const onScroll = () => {
       const currentScrollPos = window.pageYOffset;
 
       if (prevScrollPos > currentScrollPos) {
@@ -21,17 +21,17 @@ export const Navbar = () => {
       setPrevScrollPos(currentScrollPos);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', onScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [prevScrollPos]);
 
   return (
     <nav
-      className={`h-[7.5rem] lg:h-36  flex items-center justify-between px-6 lg:px-14 xl:px-32 fixed w-full left-1/2 transform -translate-x-1/2 z-50 bg-white ${
-        isVisible ? 'top-0' : '-top-[7.5rem]'
+      className={`h-[7.5rem] lg:h-36 flex items-center justify-between px-6 lg:px-14 xl:px-32 fixed w-full left-1/2 transform -translate-x-1/2 z-50 bg-white ${
+        isVisible ? 'top-0' : '-top-[9.1rem]'
       } transition-all duration-300`}
     >
       <NavbarItem />

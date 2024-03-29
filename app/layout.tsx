@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        <div className="pt-40">
+        <div className="pt-[9rem]">
           {children}
           <Socials />
           <Footer />
