@@ -31,7 +31,7 @@ export const Navbar = () => {
   return (
     <nav
       className={`h-[7.5rem] lg:h-36 flex items-center justify-between px-6 lg:px-14 xl:px-32 fixed w-full left-1/2 transform -translate-x-1/2 z-50 bg-white ${
-        isVisible ? 'top-0' : '-top-[9.1rem]'
+        isVisible ? 'top-0' : '-top-[7.6rem] lg:-top-[9.1rem]'
       } transition-all duration-300`}
     >
       <NavbarItem />
