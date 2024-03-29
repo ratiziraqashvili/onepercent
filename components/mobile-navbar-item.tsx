@@ -11,7 +11,7 @@ export const MobileNavbarItem = () => {
       </div>
       <Link href="/" className="lg:hidden">
         <Image
-          className="cursor-pointer"
+          className="cursor-pointer ml-6"
           width={100}
           height={100}
           alt="OnePercent"
