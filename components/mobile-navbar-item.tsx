@@ -1,15 +1,22 @@
 import { Menu, Search, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { MobileMenu } from "./mobile-menu";
 
 export const MobileNavbarItem = () => {
   return (
     <>
       <div className="lg:hidden">
-        <Menu strokeWidth={1} className="size-7 cursor-pointer" />
+        <MobileMenu />
       </div>
       <Link href="/" className="lg:hidden">
-        <Image className="cursor-pointer" width={100} height={100} alt="OnePercent" src="/logo.jpg" />
+        <Image
+          className="cursor-pointer"
+          width={100}
+          height={100}
+          alt="OnePercent"
+          src="/logo.jpg"
+        />
       </Link>
       <div className="flex gap-5 lg:hidden">
         <Search
