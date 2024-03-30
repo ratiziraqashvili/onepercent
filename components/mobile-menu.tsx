@@ -31,7 +31,7 @@ export const MobileMenu = () => {
       <SheetContent className="pt-40 flex flex-col" side="left">
         <div className="flex flex-col flex-1">
           {routes.map((route) => (
-            <Link href={route.href}>
+            <Link key={route.href} href={route.href}>
               <button
                 className={cn(
                   "text-start hover:bg-primary-foreground px-6 py-3 text-lg w-full",
