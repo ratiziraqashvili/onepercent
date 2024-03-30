@@ -1,3 +1,15 @@
-export const Container = ({ children }: { children: React.ReactNode }) => {
-  return <div className="max-w-[68rem] mx-auto font-sans">{children}</div>;
+import { cn } from "@/lib/utils";
+
+export const Container = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={cn("max-w-[68rem] mx-auto font-sans", className)}>
+      {children}
+    </div>
+  );
 };

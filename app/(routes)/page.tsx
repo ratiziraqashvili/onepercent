@@ -15,11 +15,10 @@ const RootPage = async () => {
         currency,
         price,
         description,
-        "slug": slug.current
+        categories,
+        "slug": slug.current,
     }`
   );
-
-  console.log(products)
   return (
     <div>
       <BannerImages />

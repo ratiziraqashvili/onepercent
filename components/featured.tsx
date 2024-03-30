@@ -10,7 +10,7 @@ interface FeaturedProps {
 
 export const Featured = ({ products }: FeaturedProps) => {
     return (
-        <Container>
+        <Container className="md:px-12 px-2 lg:px-3">
             <Heading title="ყველაზე მოთხოვნადი" />
             <ProductCard products={products} />
         </Container>

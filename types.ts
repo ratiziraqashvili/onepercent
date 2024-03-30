@@ -8,4 +8,5 @@ export type Product = {
     name: string;
     currency: string;
     slug: string;
+    categories: string[];
   }
