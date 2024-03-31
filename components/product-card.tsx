@@ -2,6 +2,7 @@ import { urlForImage } from "@/sanity/lib/image";
 import { Product } from "@/types";
 import { SanityProject } from "next-sanity";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ProductCardProps {
   products: Product[];
@@ -11,7 +12,8 @@ export const ProductCard = ({ products }: ProductCardProps) => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 gap-y-7">
       {products.map((product) => (
-        <div
+        <Link
+          href={`/products/${product.name.replace(/\s+/g, "-")}`}
           key={product._id}
           className="flex flex-col gap-y-2 cursor-pointer group"
         >
@@ -20,7 +22,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
               alt=""
               src={urlForImage(product.images[0])}
               fill
-              className="object-cover rounded-lg overflow-hidden group-hover:scale-105 transition duration-200"
+              className="object-cover rounded-lg overflow-hidden group-hover:scale-105 transition duration-300"
             />
           </div>
           <div className="flex flex-col gap-2">
@@ -36,7 +38,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
               {product.price.toFixed(2)} {product.currency}
             </span>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

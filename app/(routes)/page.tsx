@@ -8,7 +8,6 @@ const RootPage = async () => {
   const products = await client.fetch<Product[]>(
     groq`*[_type == "product"] {
         _id,
-        createdAt,
         name,
         sku,
         images,
