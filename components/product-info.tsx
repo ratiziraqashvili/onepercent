@@ -4,6 +4,7 @@ import { Product } from "@/types";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import useCart from "@/hooks/use-cart";
 
 interface ProductInfoProps {
   product: Product;
@@ -11,6 +12,7 @@ interface ProductInfoProps {
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]);
+  const { addItem } = useCart();
 
   const onSelectedSize = (size: string) => {
     setSelectedSize(size);
@@ -23,11 +25,13 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
         size: selectedSize,
       },
     };
+
+    addItem(item);
   };
 
   return (
     <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-      <h1 className="text-3xl tracking-wider">{product.name}</h1>
+      <h1 className="text-4xl tracking-wider">{product.name}</h1>
 
       <div className="mt-3">
         <h2 className="sr-only">Product information</h2>
