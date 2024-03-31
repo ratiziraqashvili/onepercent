@@ -1,4 +1,5 @@
 export type Product = {
+  product_data: any;
   _id: string;
   sku: string;
   images: any;

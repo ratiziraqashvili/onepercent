@@ -3,9 +3,15 @@ import { Product } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+interface ProductWithData extends Product {
+    product_data: {
+        size?: string;
+    };
+}
+
 interface CartStore {
-    items: { product: Product; quantity: number}[];
-    addItem: (data: Product) => void;
+    items: { product: ProductWithData; quantity: number}[];
+    addItem: (data: ProductWithData) => void;
     removeItem: (id: string) => void;
     removeAll: () => void;
 }
@@ -16,11 +22,15 @@ const useCart = create(
         addItem: (data: Product) => {
             const { toast } = useToast();
             const currentItems = get().items;
-            const existingItem = currentItems.find((item) => item.product._id === data._id);
+            const existingItem = currentItems.find(
+                (item) => 
+                item.product._id === data._id && 
+                item.product.product_data?.size === data.product_data?.size
+            );
 
             if (existingItem) {
                 const updatedItems = currentItems.map((item) =>
-                item.product._id === data._id
+                item.product._id === data._id && item.product.product_data?.size === data.product_data?.size
                   ? { ...item, quantity: item.quantity + 1 }
                   : item
               );
@@ -29,13 +39,13 @@ const useCart = create(
 
               toast({
                 title: "Item quantity updated",
-                description: `${data.name} quantity has been increased in your cart.`,
+                description: `${data.name} (${data.product_data?.size}) quantity has been increased in your cart.`,
               });
               } else {
                 set({ items: [...get().items, { product: data, quantity: 1 }] });
                 toast({
                   title: "Item added to cart",
-                  description: `${data.name} has been added to your cart.`,
+                  description: `${data.name} (${data.product_data?.size}) has been added to your cart.`,
                 });
               }    
         },
