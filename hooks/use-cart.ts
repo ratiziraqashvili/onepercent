@@ -41,7 +41,7 @@ const useCart = create(
               set({ items: updatedItems });
 
               toast({
-                description: `${data.name} (${data.product_data?.size}) რაოდენობა შემცირდა კალათაში.`,
+                description: `${data.name} (${data.product_data?.size}) რაოდენობა გაიზარდა კალათაში.`,
               });
               } else {
                 const newItem: CartItem = { ...data, quantity: 1 };

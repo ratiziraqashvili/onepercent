@@ -29,10 +29,6 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
     addItem(item);
   };
 
-  console.log(items)
-
-  console.log(items.length)
-
   return (
     <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
       <h1 className="text-4xl tracking-wider">{product.name}</h1>

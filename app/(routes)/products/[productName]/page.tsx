@@ -1,3 +1,4 @@
+import { ProductGallery } from "@/components/product-gallery";
 import { ProductInfo } from "@/components/product-info";
 import { client } from "@/sanity/lib/client";
 import { Product } from "@/types";
@@ -25,13 +26,12 @@ const ProductPage = async ({ params }: { params: { productName: string } }) => {
     }`
   );
 
-  console.log(product)
-
   return (
-    <div className="mx-auto max-w-5xl sm:px-6 sm:pt-16 lg:px-8">
+    <div className="mx-auto max-w-5xl sm:px-6 lg:pt-16 lg:px-8">
       <div className="mx-auto max-w-2xl lg:max-w-none">
-        <div className="pb-20 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-12">
-            <ProductInfo product={product} />
+        <div className="pb-20 grid lg:grid-cols-2 lg:items-start lg:gap-x-16">
+          <ProductGallery product={product} />
+          <ProductInfo product={product} />
         </div>
       </div>
     </div>
