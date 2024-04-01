@@ -18,6 +18,7 @@ interface ProductWithData extends Product {
     addItem: (data: ProductWithData) => void;
     removeItem: (id: string) => void;
     removeAll: () => void;
+    setItemQuantity: (id: string, quantity: number) => void;
   }
 
 const useCart = create(
@@ -58,6 +59,15 @@ const useCart = create(
             })
         },
         removeAll: () => set({ items: [] }),
+        setItemQuantity: (id, quantity) => {
+          const updatedItems = get().items.map((item) =>
+          item._id === id ? { ...item, quantity } : item
+        );
+        set({ items: updatedItems });
+        toast({
+          description: `${get().items.find((item) => item._id === id)?.name} რაოდენობა შეიცვალა ${quantity}-ზე.`,
+        });
+        }
     }), {
         name: "cart-storage",
         storage: createJSONStorage(() => localStorage)
