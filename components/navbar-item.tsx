@@ -1,5 +1,6 @@
 "use client";
 
+import useCart from "@/hooks/use-cart";
 import { cn } from "@/lib/utils";
 import { Search, ShoppingBag } from "lucide-react";
 import Image from "next/image";
@@ -8,6 +9,7 @@ import { usePathname } from "next/navigation";
 
 export const NavbarItem = () => {
   const pathname = usePathname();
+  const { items } = useCart();
 
   const routes = [
     {
@@ -54,13 +56,15 @@ export const NavbarItem = () => {
       <div className="lg:flex hidden gap-5">
         <Search
           strokeWidth={1}
-          className="size-6 hover:scale-105 cursor-pointer"
+          className="size-6 hover:scale-105 cursor-pointer transition"
         />
-        <Link href="/cart">
-          <ShoppingBag
-            strokeWidth={1}
-            className="size-6 hover:scale-105 cursor-pointer"
-          />
+        <Link className="relative hover:scale-105 transition" href="/cart">
+          <ShoppingBag strokeWidth={1} className="size-6" />
+          {items.length !== 0 && (
+            <div className="bg-black rounded-full text-white flex items-center justify-center absolute px-2 left-3 -top-2 py-1 text-xs">
+              <span>{items.length}</span>
+            </div>
+          )}
         </Link>
       </div>
     </>

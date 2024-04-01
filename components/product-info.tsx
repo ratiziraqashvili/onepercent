@@ -12,7 +12,7 @@ interface ProductInfoProps {
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]);
-  const { addItem } = useCart();
+  const { addItem, items } = useCart();
 
   const onSelectedSize = (size: string) => {
     setSelectedSize(size);
@@ -28,6 +28,10 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
 
     addItem(item);
   };
+
+  console.log(items)
+
+  console.log(items.length)
 
   return (
     <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">

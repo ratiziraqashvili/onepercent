@@ -1,36 +1,39 @@
-import { useToast } from "@/components/ui/use-toast";
+import { toast, useToast } from "@/components/ui/use-toast";
 import { Product } from "@/types";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
 interface ProductWithData extends Product {
     product_data: {
-        size?: string;
+      size?: string;
     };
-}
-
-interface CartStore {
-    items: { product: ProductWithData; quantity: number}[];
+  }
+  
+  interface CartItem extends ProductWithData {
+    quantity: number;
+  }
+  
+  interface CartStore {
+    items: CartItem[];
     addItem: (data: ProductWithData) => void;
     removeItem: (id: string) => void;
     removeAll: () => void;
-}
+  }
 
 const useCart = create(
     persist<CartStore>((set, get) => ({
         items: [],
         addItem: (data: Product) => {
-            const { toast } = useToast();
             const currentItems = get().items;
             const existingItem = currentItems.find(
                 (item) => 
-                item.product._id === data._id && 
-                item.product.product_data?.size === data.product_data?.size
+                item._id === data._id && 
+                item.product_data?.size === data.product_data?.size
             );
 
             if (existingItem) {
                 const updatedItems = currentItems.map((item) =>
-                item.product._id === data._id && item.product.product_data?.size === data.product_data?.size
+                item._id === data._id && item.product_data?.size === data.product_data?.size
                   ? { ...item, quantity: item.quantity + 1 }
                   : item
               );
@@ -38,22 +41,20 @@ const useCart = create(
               set({ items: updatedItems });
 
               toast({
-                title: "Item quantity updated",
-                description: `${data.name} (${data.product_data?.size}) quantity has been increased in your cart.`,
+                description: `${data.name} (${data.product_data?.size}) რაოდენობა შემცირდა კალათაში.`,
               });
               } else {
-                set({ items: [...get().items, { product: data, quantity: 1 }] });
+                const newItem: CartItem = { ...data, quantity: 1 };
+                set({ items: [...get().items, newItem ]});
                 toast({
-                  title: "Item added to cart",
-                  description: `${data.name} (${data.product_data?.size}) has been added to your cart.`,
+                  description: `${data.name} (${data.product_data?.size}) დაემატა კალათაში.`,
                 });
               }    
         },
         removeItem: (id: string) => {
-            const { toast } = useToast();
-            set({ items: [...get().items.filter((item) => item.product._id !== id)] });
+            set({ items: [...get().items.filter((item) => item._id !== id)] });
             toast({
-                title: "Item removed from cart."
+                title: "პროდუქტი წაიშალა კალათიდან."
             })
         },
         removeAll: () => set({ items: [] }),
