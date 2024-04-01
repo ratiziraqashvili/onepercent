@@ -25,7 +25,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
         size: selectedSize,
       },
     };
-
+    
     addItem(item);
   };
 

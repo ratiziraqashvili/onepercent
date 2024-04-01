@@ -23,7 +23,7 @@ interface ProductWithData extends Product {
 const useCart = create(
     persist<CartStore>((set, get) => ({
         items: [],
-        addItem: (data: Product) => {
+        addItem: (data) => {
             const currentItems = get().items;
             const existingItem = currentItems.find(
                 (item) => 
@@ -41,13 +41,13 @@ const useCart = create(
               set({ items: updatedItems });
 
               toast({
-                description: `${data.name} (${data.product_data?.size}) რაოდენობა გაიზარდა კალათაში.`,
+                description: `${data.name} ${data.product_data?.size && `(${data.product_data.size})`} რაოდენობა გაიზარდა კალათაში.`,
               });
               } else {
                 const newItem: CartItem = { ...data, quantity: 1 };
                 set({ items: [...get().items, newItem ]});
                 toast({
-                  description: `${data.name} (${data.product_data?.size}) დაემატა კალათაში.`,
+                  description: `${data.name} ${data.product_data?.size && `(${data.product_data.size})`} დაემატა კალათაში.`,
                 });
               }    
         },
