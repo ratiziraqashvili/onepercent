@@ -9,7 +9,7 @@ interface ProductWithData extends Product {
     };
   }
   
-  interface CartItem extends ProductWithData {
+  export interface CartItem extends ProductWithData {
     quantity: number;
   }
   

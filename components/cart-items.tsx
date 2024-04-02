@@ -1,18 +1,28 @@
 "use client";
 
-import useCart from "@/hooks/use-cart";
+import useCart, { CartItem } from "@/hooks/use-cart";
 import { EmptyCart } from "./empty-cart";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/image";
 import Link from "next/link";
 import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { useToast } from "./ui/use-toast";
+import { X } from "lucide-react";
 
 export const CartItems = () => {
-  const { items, setItemQuantity } = useCart();
+  const { items, setItemQuantity, removeItem } = useCart();
+  const { toast } = useToast();
 
   if (items.length === 0) return <EmptyCart />;
 
-  console.log(items);
+  const removeCartItem = (product: CartItem) => {
+    removeItem(product._id);
+    toast({
+      description: `${product.name} ამოღებულია კალათიდან.`,
+      variant: "destructive",
+    });
+  };
 
   return (
     <ul
@@ -69,6 +79,17 @@ export const CartItems = () => {
                       setItemQuantity(product._id, Number(event?.target.value))
                     }
                   />
+                  <div className="absolute right-0 top-0">
+                    <Button
+                      variant="ghost"
+                      type="button"
+                      className="-mr-2 inline-flex p-2"
+                      onClick={() => removeCartItem(product)}
+                    >
+                      <span className="sr-only">Remove</span>
+                      <X className="h-5 w-5" aria-hidden="true" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
