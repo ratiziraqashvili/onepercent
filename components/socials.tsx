@@ -1,7 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const Socials = () => {
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/studio")) return null;
+
   return (
     <div className="border-t py-14 flex justify-center w-full">
       <div className="flex gap-7">

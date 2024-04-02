@@ -3,10 +3,14 @@
 import { useState, useEffect } from 'react';
 import { MobileNavbarItem } from './mobile-navbar-item';
 import { NavbarItem } from './navbar-item';
+import { usePathname } from 'next/navigation';
 
 export const Navbar = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const pathname = usePathname();
+
+  if (pathname.startsWith("/studio")) return null;
 
   useEffect(() => {
     const onScroll = () => {

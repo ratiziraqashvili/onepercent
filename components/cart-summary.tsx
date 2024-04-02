@@ -2,9 +2,12 @@
 
 import useCart from "@/hooks/use-cart";
 import { Button } from "./ui/button";
+import { useState } from "react";
 
 export const CartSummary = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { items } = useCart();
+  const disabled = items.length === 0 || isLoading;
 
   const calculateSubtotal = () => {
     let subtotal = 0;
@@ -43,7 +46,9 @@ export const CartSummary = () => {
       </dl>
 
       <div className="mt-6">
-        <Button className="w-full">Checkout</Button>
+        <Button disabled={disabled} className="w-full">
+          გადახდა
+        </Button>
       </div>
     </section>
   );

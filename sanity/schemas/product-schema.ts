@@ -62,5 +62,12 @@ export const product = defineType({
             title: "Price",
             type: "number",
         },
+        defineField({
+            name: "isFeatured",
+            title: "Featured Product",
+            type: "boolean",
+            description: "Toggle this to make the product featured"
+          })
+      
     ]
 })

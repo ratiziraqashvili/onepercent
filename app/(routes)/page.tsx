@@ -6,7 +6,7 @@ import { groq } from "next-sanity";
 
 const RootPage = async () => {
   const products = await client.fetch<Product[]>(
-    groq`*[_type == "product"] {
+    groq`*[_type == "product" && isFeatured == true && defined(isFeatured)] {
         _id,
         name,
         sku,
@@ -18,6 +18,8 @@ const RootPage = async () => {
         "slug": slug.current,
     }`
   );
+
+  console.log(products)
   return (
     <div>
       <BannerImages />
