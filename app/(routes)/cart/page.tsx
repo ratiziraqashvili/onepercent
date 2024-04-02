@@ -1,4 +1,5 @@
 import { CartItems } from "@/components/cart-items";
+import { CartSummary } from "@/components/cart-summary";
 
 const CartPage = () => {
   return (
@@ -15,6 +16,7 @@ const CartPage = () => {
             </h2>
             <CartItems />
           </section>
+          <CartSummary />
         </form>
       </main>
     </div>
