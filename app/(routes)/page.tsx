@@ -1,4 +1,5 @@
 import { BannerImages } from "@/components/banner-images";
+import { Collections } from "@/components/collections";
 import { Featured } from "@/components/featured";
 import { client } from "@/sanity/lib/client";
 import { Product } from "@/types";
@@ -19,11 +20,13 @@ const RootPage = async () => {
     }`
   );
 
-  console.log(products)
+  const productCategories = products.map(product => [product.categories, product.images]);
+
   return (
     <div>
       <BannerImages />
       <Featured products={products} />
+      <Collections categories={productCategories} />
     </div>
   );
 };
