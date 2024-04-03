@@ -1,26 +1,44 @@
+"use client";
+
 import { client } from "@/sanity/lib/client";
 import { urlForImage } from "@/sanity/lib/image";
 import { Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 interface ProductCardProps {
   products: Product[];
 }
 
 export const ProductCard = ({ products }: ProductCardProps) => {
-  const getCategoryData = async (categoryRefs: string[]) => {
-    const query = `*[_type == "category" && _id in $categoryIds] {
-      _id,
-      name,
-      image
-    }`;
-    const categoryIds = categoryRefs.map((ref: any) => ref._ref);
-    const categories = await client.fetch<any[]>(query, {
-      categoryIds,
-    });
-    return categories;
-  };
+  const [categories, setCategories] = useState<{ [key: string]: string[] }>({});
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const categoriesData: { [key: string]: string[] } = {};
+
+      for (const product of products) {
+        const categoryRefs = product.categories;
+        const query = `*[_type == "category" && _id in $categoryIds] {
+          _id,
+          name
+        }`;
+        const categoryIds = categoryRefs.map((ref: any) => ref._ref);
+        const fetchedCategories = await client.fetch<any[]>(query, {
+          categoryIds,
+        });
+
+        categoriesData[product._id] = fetchedCategories.map(
+          (category) => category.name
+        );
+      }
+
+      setCategories(categoriesData);
+    };
+
+    fetchCategories();
+  }, [products]);
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 gap-y-7">
@@ -44,11 +62,9 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                 <p className="text-sm tracking-wider opacity-90 group-hover:underline">
                   {product.name}
                 </p>
-                {getCategoryData(product.categories).then((categories) => (
-                  <span className="text-xs text-muted-foreground">
-                    {categories.map((category) => category.name).join(", ")}
-                  </span>
-                ))}
+                <span className="text-xs text-muted-foreground">
+                  {categories[product._id]?.join(", ") || ""}
+                </span>
               </div>
               <span className="text-sm tracking-widest opacity-90">
                 {product.price.toFixed(2)} {product.currency}
