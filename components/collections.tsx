@@ -1,9 +1,10 @@
+import { Categories } from "@/types";
 import { CollectionsCard } from "./collections-card";
 import { Container } from "./container";
 import { Heading } from "./heading";
 
 interface CollectionsProps {
-  categories: string[][];
+  categories: Categories[];
 }
 
 export const Collections = ({ categories }: CollectionsProps) => {

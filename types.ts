@@ -12,3 +12,9 @@ export type Product = {
   sizes?: string[];
   colors?: string[];
   }
+
+  export type Categories = {
+    _id: string;
+    name: string;
+    image: any;
+  }

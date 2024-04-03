@@ -4,6 +4,7 @@ import { Featured } from "@/components/featured";
 import { client } from "@/sanity/lib/client";
 import { Product } from "@/types";
 import { groq } from "next-sanity";
+import { Categories } from "../../types";
 
 const RootPage = async () => {
   const products = await client.fetch<Product[]>(
@@ -20,13 +21,20 @@ const RootPage = async () => {
     }`
   );
 
-  const productCategories = products.map(product => [product.categories, product.images]);
+  const categories =
+    await client.fetch<Categories[]>(groq`*[_type == "category"] {
+    _id,
+    image,
+    name
+  }`);
+
+  console.log(categories);
 
   return (
     <div>
       <BannerImages />
       <Featured products={products} />
-      <Collections categories={productCategories} />
+      <Collections categories={categories} />
     </div>
   );
 };
