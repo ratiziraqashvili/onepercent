@@ -28,8 +28,6 @@ const RootPage = async () => {
     name
   }`);
 
-  console.log(categories);
-
   return (
     <div>
       <BannerImages />

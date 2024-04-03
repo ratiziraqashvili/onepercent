@@ -9,7 +9,7 @@ interface CollectionsProps {
 
 export const Collections = ({ categories }: CollectionsProps) => {
   return (
-    <Container className="grid md:grid-cols-3 gap-3">
+    <Container>
       <Heading title="კოლექციები" />
       <CollectionsCard categories={categories} />
     </Container>
