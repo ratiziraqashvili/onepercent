@@ -34,8 +34,11 @@ const CollectionPage = async ({
   );
 
   const filteredProducts = products.filter((product) =>
-    product.categories.some(
-      (category) => category.name === decodedCollectionName
+    product.categories.some((category) =>
+      decodedCollectionName === "all"
+        ? category
+        //@ts-ignore
+        : category.name === decodedCollectionName
     )
   );
 
