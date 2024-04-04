@@ -6,6 +6,7 @@ import { Search, ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { SearchModal } from "./modals/search-modal";
 
 export const NavbarItem = () => {
   const pathname = usePathname();
@@ -54,10 +55,7 @@ export const NavbarItem = () => {
         </div>
       </div>
       <div className="lg:flex hidden gap-5">
-        <Search
-          strokeWidth={1}
-          className="size-6 hover:scale-105 cursor-pointer transition"
-        />
+        <SearchModal />
         <Link className="relative hover:scale-105 transition" href="/cart">
           <ShoppingBag strokeWidth={1} className="size-6" />
           {items.length !== 0 && (

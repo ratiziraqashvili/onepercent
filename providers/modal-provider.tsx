@@ -1,3 +1,5 @@
+"use client"
+
 import { SearchModal } from "@/components/modals/search-modal";
 import { useEffect, useState } from "react"
 
