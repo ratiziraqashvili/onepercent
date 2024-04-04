@@ -29,6 +29,8 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
     addItem(item);
   };
 
+  console.log("-------------------", product.sizes)
+
   return (
     <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
       <h1 className="text-4xl tracking-wider">{product.name}</h1>
@@ -40,7 +42,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
         </p>
       </div>
 
-      {product.sizes?.[0] !== "" && (
+      {product.sizes?.[0] && (
         <div className="mt-4">
           <p className="text-sm">
             <span className="text-muted-foreground">ზომა:</span>{" "}

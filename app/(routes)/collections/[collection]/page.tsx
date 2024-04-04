@@ -18,9 +18,14 @@ const CollectionPage = async ({
     groq`*[_type == "product"] {
             _id,
             name,
+            sku,
             images,
             price,
             currency,
+            description,
+            sizes,
+            colors,
+            "slug": slug.current,
             "categories": categories[]->{
                 _id,
                 name
