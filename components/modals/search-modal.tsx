@@ -2,12 +2,15 @@ import { DialogTrigger } from "@radix-ui/react-dialog";
 import { Dialog, DialogClose, DialogContent } from "../ui/dialog";
 import { MoveRight, Search, X } from "lucide-react";
 import { Input } from "../ui/input";
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { client } from "@/sanity/lib/client";
+import { groq } from "next-sanity";
 
 export const SearchModal = () => {
   const [inputValue, setInputValue] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const onInputChange = (event: any) => {
     setInputValue(event.target.value);
@@ -25,6 +28,30 @@ export const SearchModal = () => {
     setIsInputFocused(false);
   };
 
+  const fetchCategories = async () => {
+    try {
+      const query = groq`*[_type == "category" && (name match ("*" + $inputValue + "*") || slug.current match ("*" + $inputValue + "*"))]{
+        name,
+      }`;
+      const categories = await client.fetch(query, { inputValue });
+      return categories;
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedCategories = await fetchCategories();
+      setCategories(fetchedCategories);
+    };
+
+    fetchData();
+  }, [inputValue]);
+
+  console.log(categories);
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -33,7 +60,7 @@ export const SearchModal = () => {
           className="size-6 hover:scale-105 cursor-pointer transition"
         />
       </DialogTrigger>
-      <DialogContent className="h-[7.5rem] lg:h-36 flex justify-center items-center gap-5 md:gap-2">
+      <DialogContent className="h-[9.5rem] lg:h-40 flex justify-center items-center gap-5 md:gap-2">
         <div className="xl:w-[50%] sm:w-[75%] w-full relative flex items-center">
           <Input
             className="w-full mx-auto rounded-none placeholder:tracking-widest peer pl-4 pr-8"
@@ -72,8 +99,8 @@ export const SearchModal = () => {
                 {/* <SearchSuggestions /> */}
                 {/* <SearchProducts /> */}
               </div>
-              <div className="flex justify-between items-center group w-full cursor-pointer hover:bg-primary/5 py-3 px-3">
-                <span className="text-sm tracking-wide">
+              <div className="flex justify-between items-center group w-full cursor-pointer hover:bg-gray-50 py-3 px-4 bg-white border-[1px]">
+                <span className="text-sm tracking-wider">
                   იძებნება "{inputValue}"
                 </span>
                 <MoveRight
