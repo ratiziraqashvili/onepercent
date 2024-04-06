@@ -11,6 +11,7 @@ export const SearchModal = () => {
   const [inputValue, setInputValue] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const onInputChange = (event: any) => {
     setInputValue(event.target.value);
@@ -41,16 +42,30 @@ export const SearchModal = () => {
     }
   };
 
+  const fetchProducts = async () => {
+    try {
+      const query = groq`*[_type == "product" && (name match ("*" + $inputValue + "*") || slug.current match ("*" + $inputValue + "*"))]{
+        images,
+        name
+      }`;
+      const products = await client.fetch(query, { inputValue });
+      return products;
+    } catch (error) {
+      console.error("Error while fetching products", error);
+      return [];
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       const fetchedCategories = await fetchCategories();
+      const fetchedProducts = await fetchProducts();
+      setProducts(fetchedProducts);
       setCategories(fetchedCategories);
     };
 
     fetchData();
   }, [inputValue]);
-
-  console.log(categories);
 
   return (
     <Dialog>
