@@ -6,12 +6,16 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { client } from "@/sanity/lib/client";
 import { groq } from "next-sanity";
+import { SearchCategories } from "../search-categories";
+import { SearchProducts } from "../search-products";
 
 export const SearchModal = () => {
   const [inputValue, setInputValue] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState<{ name: string } | never[]>([]);
+  const [products, setProducts] = useState<
+    { name: string; images: any } | never[]
+  >([]);
 
   const onInputChange = (event: any) => {
     setInputValue(event.target.value);
@@ -109,10 +113,10 @@ export const SearchModal = () => {
             </div>
           )}
           {inputValue && isInputFocused && (
-            <div className="sm:w-[101.3%] w-screen overflow-y-auto absolute top-20 sm:top-11 sm:-left-1 -left-6 flex">
-              <div className="flex-1">
-                {/* <SearchSuggestions /> */}
-                {/* <SearchProducts /> */}
+            <div className="sm:w-[101.3%] w-screen overflow-y-auto absolute top-20 sm:top-11 sm:-left-1 -left-6 flex flex-col border-[1px]">
+              <div className="flex-1 p-4 flex sm:flex-row flex-col gap-4 bg-white">
+                <SearchCategories categories={categories} />
+                <SearchProducts products={products} />
               </div>
               <div className="flex justify-between items-center group w-full cursor-pointer hover:bg-gray-50 py-3 px-4 bg-white border-[1px]">
                 <span className="text-sm tracking-wider">
