@@ -12,9 +12,11 @@ import { SearchProducts } from "../search-products";
 export const SearchModal = () => {
   const [inputValue, setInputValue] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const [categories, setCategories] = useState<{ name: string } | never[]>([]);
+  const [categories, setCategories] = useState<{ name: string }[] | never[]>(
+    []
+  );
   const [products, setProducts] = useState<
-    { name: string; images: any } | never[]
+    { name: string; images: any }[] | never[]
   >([]);
 
   const onInputChange = (event: any) => {
@@ -27,10 +29,6 @@ export const SearchModal = () => {
 
   const onInputFocus = () => {
     setIsInputFocused(true);
-  };
-
-  const onInputBlur = () => {
-    setIsInputFocused(false);
   };
 
   const fetchCategories = async () => {
@@ -86,7 +84,6 @@ export const SearchModal = () => {
             value={inputValue}
             onChange={onInputChange}
             onFocus={onInputFocus}
-            onBlur={onInputBlur}
           />
           <span
             className={cn(
@@ -114,9 +111,9 @@ export const SearchModal = () => {
           )}
           {inputValue && isInputFocused && (
             <div className="sm:w-[101.3%] w-screen overflow-y-auto absolute top-20 sm:top-11 sm:-left-1 -left-6 flex flex-col border-[1px]">
-              <div className="flex-1 p-4 flex sm:flex-row flex-col gap-4 bg-white">
-                <SearchCategories categories={categories} />
-                <SearchProducts products={products} />
+              <div className="flex-1 flex sm:flex-row flex-col sm:gap-4 bg-white">
+                <SearchCategories categories={categories} products={products} />
+                <SearchProducts categories={categories} products={products} />
               </div>
               <div className="flex justify-between items-center group w-full cursor-pointer hover:bg-gray-50 py-3 px-4 bg-white border-[1px]">
                 <span className="text-sm tracking-wider">
