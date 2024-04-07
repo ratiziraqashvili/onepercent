@@ -11,8 +11,8 @@ export const EmptyCart = () => {
         <span className="text-sm text-muted-foreground">
           დაამატე პროდუქტები კალათაში
         </span>
-        <Link href="/">
-          <Button className="">
+        <Link href="/collections">
+          <Button>
             <Plus className="size-4 mr-2" />
             დამატება
           </Button>

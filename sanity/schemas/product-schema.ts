@@ -62,12 +62,22 @@ export const product = defineType({
             title: "Price",
             type: "number",
         },
+        {
+            name: "oldPrice",
+            title: "oldPrice",
+            type: "number",
+        },
         defineField({
             name: "isFeatured",
             title: "Featured Product",
             type: "boolean",
             description: "Toggle this to make the product featured"
-          })
-      
+          }),
+          defineField({
+            name: "isOnSale",
+            title: "On Sale",
+            type: "boolean",
+            description: "Toggle this to mark the product as being on sale",
+          }),
     ]
 })

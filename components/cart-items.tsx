@@ -55,12 +55,21 @@ export const CartItems = () => {
                       </Link>
                     </h3>
                   </div>
-                  <p className="mt-1 text-sm font-medium">
-                    {product.price.toFixed(2)} {product.currency}
-                  </p>
-                  <p className="mt-1 text-sm font-medium">
-                    Size: <strong>{product?.product_data?.size}</strong>
-                  </p>
+                  <div className="flex items-center gap-2 pt-1">
+                    {product.oldPrice && (
+                      <p className="line-through text-[0.8rem] text-muted-foreground tracking-wider">
+                        {product.oldPrice.toFixed(2)} {product.currency}
+                      </p>
+                    )}
+                    <p className="text-sm font-medium">
+                      {product.price.toFixed(2)} {product.currency}
+                    </p>
+                  </div>
+                  {product?.product_data?.size && (
+                    <p className="mt-1 text-sm font-medium">
+                      Size: <strong>{product?.product_data?.size}</strong>
+                    </p>
+                  )}
                 </div>
 
                 <div className="mt-4 sm:mt-0 sm:pr-9">

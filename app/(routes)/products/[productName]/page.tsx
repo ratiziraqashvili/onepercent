@@ -11,7 +11,7 @@ const ProductPage = async ({ params }: { params: { productName: string } }) => {
     " "
   );
   const product = await client.fetch<Product>(
-    groq`*[_type == "product" && name == "${decodedProductName}"][0] {
+    groq`*[_type == "product" && name match "${decodedProductName}"][0] {
         _id,
         "id": _id,
         name,
@@ -23,6 +23,8 @@ const ProductPage = async ({ params }: { params: { productName: string } }) => {
         sizes,
         categories,
         colors,
+        oldPrice,
+        isOnSale,
         "slug": slug.current
     }`
   );
@@ -32,7 +34,7 @@ const ProductPage = async ({ params }: { params: { productName: string } }) => {
       <div className="border-t-[1px]">
         <Container className="">
           <h2 className="tracking-wider text-muted-foreground py-36">
-            No results for "{params.productName}". Check the spelling or use a
+            No results for "{decodedProductName}". Check the spelling or use a
             different word or phrase.
           </h2>
         </Container>

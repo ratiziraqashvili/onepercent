@@ -26,6 +26,8 @@ const CollectionPage = async ({
             description,
             sizes,
             colors,
+            isOnSale,
+            oldPrice,
             "slug": slug.current,
             "categories": categories[]->{
                 _id,

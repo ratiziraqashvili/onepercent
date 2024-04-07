@@ -17,6 +17,8 @@ const RootPage = async () => {
         price,
         description,
         categories,
+        isOnSale,
+        oldPrice,
         "slug": slug.current,
     }`
   );

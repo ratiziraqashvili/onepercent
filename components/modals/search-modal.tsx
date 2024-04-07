@@ -97,10 +97,13 @@ export const SearchModal = () => {
           >
             ძებნა
           </span>
-          <Search
-            strokeWidth={1}
-            className="size-5 text-muted-foreground absolute right-2 hover:scale-105 cursor-pointer"
-          />
+          <DialogClose asChild>
+            <Search
+              onClick={() => router.push(`/products/${inputValue}`)}
+              strokeWidth={1}
+              className="size-5 text-muted-foreground absolute right-2 hover:scale-105 cursor-pointer"
+            />
+          </DialogClose>
           {inputValue && (
             <div className="absolute right-9 border-r-[1px] py-1 pr-3">
               <div
@@ -118,7 +121,7 @@ export const SearchModal = () => {
                 <SearchCategories categories={categories} products={products} />
                 <SearchProducts categories={categories} products={products} />
               </div>
-              <div
+              <DialogClose
                 onClick={() => router.push(`/products/${inputValue}`)}
                 className="flex justify-between items-center group w-full cursor-pointer hover:bg-gray-50 py-3 px-4 bg-white border-[1px]"
               >
@@ -129,7 +132,7 @@ export const SearchModal = () => {
                   strokeWidth={1}
                   className="size-4 group-hover:translate-x-1 group-hover:scale-110 transition"
                 />
-              </div>
+              </DialogClose>
             </div>
           )}
         </div>

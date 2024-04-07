@@ -6,6 +6,7 @@ import { Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { Badge } from "./ui/badge";
 
 interface ProductCardProps {
   products: Product[];
@@ -56,6 +57,11 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                 fill
                 className="object-cover rounded-lg overflow-hidden group-hover:scale-105 transition duration-300"
               />
+              {product.isOnSale && (
+                <Badge variant="main" className="absolute bottom-2 left-2">
+                  ფასდაკლება
+                </Badge>
+              )}
             </div>
             <div className="flex flex-col gap-2">
               <div>
@@ -66,9 +72,16 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                   {categories[product._id]?.join(", ") || ""}
                 </span>
               </div>
-              <span className="text-sm tracking-widest opacity-90">
-                {product.price.toFixed(2)} {product.currency}
-              </span>
+              <div className="flex items-center gap-2">
+                {product.oldPrice && (
+                  <span className="line-through text-[0.8rem] text-muted-foreground tracking-wider">
+                    {product.oldPrice.toFixed(2)} {product.currency}
+                  </span>
+                )}
+                <span className="text-sm tracking-widest opacity-90">
+                  {product.price.toFixed(2)} {product.currency}
+                </span>
+              </div>
             </div>
           </Link>
         );

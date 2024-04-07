@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import useCart from "@/hooks/use-cart";
+import { Badge } from "./ui/badge";
 
 interface ProductInfoProps {
   product: Product;
@@ -12,7 +13,7 @@ interface ProductInfoProps {
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]);
-  const { addItem, items } = useCart();
+  const { addItem } = useCart();
 
   const onSelectedSize = (size: string) => {
     setSelectedSize(size);
@@ -25,7 +26,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
         size: selectedSize,
       },
     };
-    
+
     addItem(item);
   };
 
@@ -35,9 +36,21 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
 
       <div className="mt-3">
         <h2 className="sr-only">Product information</h2>
-        <p className="text-md tracking-wider font-[300]">
-          {product.price.toFixed(2)} {product.currency}
-        </p>
+        <div className="flex items-center gap-2">
+          {product.oldPrice && (
+            <p className="line-through text-[0.8rem] text-muted-foreground tracking-wider">
+              {product.oldPrice.toFixed(2)} {product.currency}
+            </p>
+          )}
+          <p className="text-md tracking-wider font-[300]">
+            {product.price.toFixed(2)} {product.currency}
+          </p>
+          {product.isOnSale && (
+            <Badge variant="main">
+              ფასდაკლება
+            </Badge>
+          )}
+        </div>
       </div>
 
       {product.sizes?.[0] && (

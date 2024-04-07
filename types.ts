@@ -4,10 +4,12 @@ export type Product = {
   sku: string;
   images: any;
   price: number;
+  oldPrice: number;
   name: string;
   description: string;
   currency: string;
   slug: string;
+  isOnSale: boolean | null;
   categories: string[];
   sizes?: string[];
   colors?: string[];

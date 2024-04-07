@@ -1,6 +1,6 @@
 "use client";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import Image from "next/image";
@@ -32,14 +32,14 @@ export const MobileMenu = () => {
         <div className="flex flex-col flex-1">
           {routes.map((route) => (
             <Link key={route.href} href={route.href}>
-              <button
+              <SheetClose
                 className={cn(
                   "text-start hover:bg-primary-foreground px-6 py-3 text-lg w-full",
                   route.isActive && "bg-primary-foreground"
                 )}
               >
                 {route.label}
-              </button>
+              </SheetClose>
             </Link>
           ))}
         </div>
