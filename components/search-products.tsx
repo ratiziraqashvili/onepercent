@@ -33,7 +33,7 @@ export const SearchProducts = ({
       </h3>
 
       {products.map((product) => (
-        <DialogClose asChild>
+        <DialogClose key={product.name} asChild>
           <button
             onClick={() =>
               router.push(`/products/${product.name.replace(/\s+/g, "-")}`)

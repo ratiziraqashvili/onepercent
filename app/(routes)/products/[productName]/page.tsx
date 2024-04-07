@@ -34,8 +34,8 @@ const ProductPage = async ({ params }: { params: { productName: string } }) => {
       <div className="border-t-[1px]">
         <Container className="">
           <h2 className="tracking-wider text-muted-foreground py-36">
-            No results for "{decodedProductName}". Check the spelling or use a
-            different word or phrase.
+            No results for &quot;{decodedProductName}&quot;. Check the spelling
+            or use a different word or phrase.
           </h2>
         </Container>
       </div>

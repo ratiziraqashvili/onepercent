@@ -126,7 +126,7 @@ export const SearchModal = () => {
                 className="flex justify-between items-center group w-full cursor-pointer hover:bg-gray-50 py-3 px-4 bg-white border-[1px]"
               >
                 <span className="text-sm tracking-wider">
-                  იძებნება "{inputValue}"
+                  იძებნება &quot;{inputValue}&quot;
                 </span>
                 <MoveRight
                   strokeWidth={1}

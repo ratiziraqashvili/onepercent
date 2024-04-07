@@ -10,12 +10,11 @@ export const Navbar = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const pathname = usePathname();
 
-  if (pathname.startsWith("/studio")) return null;
-
+  
   useEffect(() => {
     const onScroll = () => {
       const currentScrollPos = window.pageYOffset;
-
+      
       if (prevScrollPos > currentScrollPos) {
         setIsVisible(true);
       } else {
@@ -31,7 +30,9 @@ export const Navbar = () => {
       window.removeEventListener('scroll', onScroll);
     };
   }, [prevScrollPos]);
-
+  
+  if (pathname.startsWith("/studio")) return null;
+  
   return (
     <nav
       className={`h-[7.5rem] lg:h-36 flex items-center justify-between px-6 lg:px-14 xl:px-32 fixed w-full left-1/2 transform -translate-x-1/2 z-50 bg-white ${

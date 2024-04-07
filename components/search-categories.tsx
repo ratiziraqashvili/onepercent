@@ -31,7 +31,7 @@ export const SearchCategories = ({
       </h3>
 
       {categories.map((category) => (
-        <DialogClose asChild>
+        <DialogClose key={category.name} asChild>
           <button
             onClick={() => router.push(`/collections/${category.name}`)}
             className="w-full hover:bg-gray-50 text-start text-[0.85rem] tracking-wider py-2 px-4 hover:underline"
