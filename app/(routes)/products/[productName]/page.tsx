@@ -1,3 +1,4 @@
+import { Container } from "@/components/container";
 import { ProductGallery } from "@/components/product-gallery";
 import { ProductInfo } from "@/components/product-info";
 import { client } from "@/sanity/lib/client";
@@ -25,6 +26,19 @@ const ProductPage = async ({ params }: { params: { productName: string } }) => {
         "slug": slug.current
     }`
   );
+
+  if (!product) {
+    return (
+      <div className="border-t-[1px]">
+        <Container className="">
+          <h2 className="tracking-wider text-muted-foreground py-36">
+            No results for "{params.productName}". Check the spelling or use a
+            different word or phrase.
+          </h2>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-5xl sm:px-6 lg:pt-16 lg:px-8">

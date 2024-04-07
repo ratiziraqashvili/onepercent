@@ -27,7 +27,7 @@ export const SearchProducts = ({
   if (products.length === 0) return null;
 
   return (
-    <div className={cn("w-full", categories.length > 0 && "w-[60%]")}>
+    <div className={cn("w-full", categories.length > 0 && "w-full md:w-[60%]")}>
       <h3 className="text-xs text-muted-foreground tracking-wider uppercase border-b-[1px] pb-1 p-4">
         პროდუქტები
       </h3>

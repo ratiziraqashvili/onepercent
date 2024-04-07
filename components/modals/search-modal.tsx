@@ -8,6 +8,7 @@ import { client } from "@/sanity/lib/client";
 import { groq } from "next-sanity";
 import { SearchCategories } from "../search-categories";
 import { SearchProducts } from "../search-products";
+import { useRouter } from "next/navigation";
 
 export const SearchModal = () => {
   const [inputValue, setInputValue] = useState("");
@@ -18,6 +19,8 @@ export const SearchModal = () => {
   const [products, setProducts] = useState<
     { name: string; images: any }[] | never[]
   >([]);
+
+  const router = useRouter();
 
   const onInputChange = (event: any) => {
     setInputValue(event.target.value);
@@ -115,7 +118,10 @@ export const SearchModal = () => {
                 <SearchCategories categories={categories} products={products} />
                 <SearchProducts categories={categories} products={products} />
               </div>
-              <div className="flex justify-between items-center group w-full cursor-pointer hover:bg-gray-50 py-3 px-4 bg-white border-[1px]">
+              <div
+                onClick={() => router.push(`/products/${inputValue}`)}
+                className="flex justify-between items-center group w-full cursor-pointer hover:bg-gray-50 py-3 px-4 bg-white border-[1px]"
+              >
                 <span className="text-sm tracking-wider">
                   იძებნება "{inputValue}"
                 </span>

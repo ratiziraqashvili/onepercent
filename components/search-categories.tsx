@@ -25,7 +25,7 @@ export const SearchCategories = ({
   if (categories.length === 0) return null;
 
   return (
-    <div className={cn("w-full", products.length > 0 && "w-[40%]")}>
+    <div className={cn("w-full", products.length > 0 && "md:w-[40%] w-full")}>
       <h3 className="text-xs text-muted-foreground tracking-wider font-[300] uppercase border-b-[1px] pb-1 p-4">
         კოლექციები
       </h3>
