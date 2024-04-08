@@ -37,7 +37,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
       <div className="mt-3">
         <h2 className="sr-only">Product information</h2>
         <div className="flex items-center gap-2">
-          {product.oldPrice && (
+          {product.oldPrice && product.isOnSale && (
             <p className="line-through text-[0.8rem] text-muted-foreground tracking-wider">
               {product.oldPrice.toFixed(2)} {product.currency}
             </p>
@@ -45,7 +45,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           <p className="text-md tracking-wider font-[300]">
             {product.price.toFixed(2)} {product.currency}
           </p>
-          {product.isOnSale && (
+          {product.isOnSale &&  (
             <Badge variant="main">
               ფასდაკლება
             </Badge>

@@ -73,7 +73,7 @@ export const ProductCard = ({ products }: ProductCardProps) => {
                 </span>
               </div>
               <div className="flex items-center gap-2">
-                {product.oldPrice && (
+                {product.oldPrice && product.isOnSale && (
                   <span className="line-through text-[0.8rem] text-muted-foreground tracking-wider">
                     {product.oldPrice.toFixed(2)} {product.currency}
                   </span>
