@@ -10,7 +10,7 @@ export type Product = {
   currency: string;
   slug: string;
   isOnSale: boolean | null;
-  categories: string[];
+  categories: Categories[];
   sizes?: string[];
   colors?: string[];
   }
