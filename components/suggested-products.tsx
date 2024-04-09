@@ -10,6 +10,9 @@ interface SuggestedProductsProps {
 export const SuggestedProducts = ({
   suggestedProducts,
 }: SuggestedProductsProps) => {
+
+  if (suggestedProducts.length === 0) return null;
+
   return (
     <Container>
       <Heading title="მსგავსი მოდელები" />
